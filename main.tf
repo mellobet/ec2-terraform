@@ -5,7 +5,6 @@
 # $ export AWS_DEFAULT_REGION="us-east-1"
 
 provider "aws" {
-  # version = "~> 2.0"
-  version = "2.70.0"
+  version = "~> 2.70"
   region  = "us-east-1"
 }
