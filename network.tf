@@ -25,7 +25,7 @@ resource "aws_subnet" "tf-public-subnet" {
   map_public_ip_on_launch = true
 }
 
-# Route (anythong to created internet gateway)
+# Route (anything to created internet gateway)
 resource "aws_route_table" "rtb_public" {
   vpc_id = aws_vpc.tf-main-vpc.id
   route {
