@@ -3,15 +3,27 @@ variable "cidr_vpc" {
   default = "10.1.0.0/16"
 }
 
-variable "cidr_subnet" {
+variable "cidr_subnet_1" {
   description = "CIDR block for the subnet"
-  default = "10.1.0.0/24"
+  default = "10.1.1.0/24"
 }
 
-variable "availability_zone" {
+variable "cidr_subnet_2" {
+  description = "CIDR block for the subnet 2"
+  default = "10.1.2.0/24"
+}
+
+
+variable "availability_zone_1" {
   description = "availability zone to create subnet"
   default = "us-east-1a"
 }
+
+variable "availability_zone_2" {
+  description = "availability zone to create subnet 2"
+  default = "us-east-1b"
+}
+
 
 variable "instance_ami" {
   description = "AMI for aws EC2 instance"

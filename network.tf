@@ -18,12 +18,21 @@ resource "aws_internet_gateway" "tf-igw" {
 
 
 # Subnet
-resource "aws_subnet" "tf-public-subnet" {
+resource "aws_subnet" "tf-public-subnet_1" {
   vpc_id = aws_vpc.tf-main-vpc.id
-  cidr_block = var.cidr_subnet
+  cidr_block = var.cidr_subnet_1
   # Optionals
   map_public_ip_on_launch = true
 }
+
+# Subnet
+resource "aws_subnet" "tf-public-subnet_2" {
+  vpc_id = aws_vpc.tf-main-vpc.id
+  cidr_block = var.cidr_subnet_2
+  # Optionals
+  map_public_ip_on_launch = true
+}
+
 
 # Route (anything to created internet gateway)
 resource "aws_route_table" "rtb_public" {
@@ -35,8 +44,15 @@ resource "aws_route_table" "rtb_public" {
 }
 
 # Route association.
-resource "aws_route_table_association" "rta_subnet_public" {
-  subnet_id      = aws_subnet.tf-public-subnet.id
+resource "aws_route_table_association" "rta_subnet_public_1" {
+  subnet_id      = aws_subnet.tf-public-subnet_1.id
+  route_table_id = aws_route_table.rtb_public.id
+}
+
+
+# Route association public 2.
+resource "aws_route_table_association" "rta_subnet_public_2" {
+  subnet_id      = aws_subnet.tf-public-subnet_2.id
   route_table_id = aws_route_table.rtb_public.id
 }
 
