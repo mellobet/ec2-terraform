@@ -79,3 +79,45 @@ resource "aws_security_group" "allow_ssh" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+# Network Load Balancer
+resource "aws_lb" "generic-NLB" {
+  name               = "generic-nlb"
+  internal           = false
+  load_balancer_type = "network"
+  subnets            = [
+    aws_subnet.tf-public-subnet_1.id,
+    aws_subnet.tf-public-subnet_2.id
+  ]
+}
+
+# TG group
+resource "aws_lb_target_group" "tf-example-lb-tg" {
+  name     = "tf-example-lb-tg"
+  port     = 22
+  protocol = "TCP"
+  vpc_id   = aws_vpc.tf-main-vpc.id
+}
+
+resource "aws_lb_listener" "generic-ssh" {
+  load_balancer_arn = aws_lb.generic-NLB.arn
+  port              = "22"
+  protocol          = "TCP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.tf-example-lb-tg.arn
+  }
+}
+
+resource "aws_lb_target_group_attachment" "instance_1" {
+  target_group_arn = aws_lb_target_group.tf-example-lb-tg.arn
+  target_id        = aws_instance.testInstance_1.id
+  port             = 22
+}
+
+resource "aws_lb_target_group_attachment" "instance_2" {
+  target_group_arn = aws_lb_target_group.tf-example-lb-tg.arn
+  target_id        = aws_instance.testInstance_2.id
+  port             = 22
+}
