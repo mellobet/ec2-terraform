@@ -60,8 +60,8 @@ resource "aws_security_group" "allow_jupyternb" {
   }
 }
 
-resource "aws_security_group" "allow_dango_devsrv" {
-  name   = "allow_dango_devsrv"
+resource "aws_security_group" "allow_django_devsrv" {
+  name   = "allow_django_devsrv"
   vpc_id = aws_vpc.tf-main-vpc.id
 
   ingress {
