@@ -15,7 +15,7 @@ variable "availability_zone" {
 
 variable "instance_ami" {
   description = "AMI for aws EC2 instance"
-  default     = "ami-07957d39ebba800d5"
+  default     = "ami-053adf54573f777cf" #Ubnt 18.04 LTS
 }
 
 variable "public_key_path" {
@@ -25,5 +25,5 @@ variable "public_key_path" {
 
 variable "instance_type" {
   description = "type for aws EC2 instance"
-  default     = "t2.micro"
+  default     = "t2.nano"
 }
