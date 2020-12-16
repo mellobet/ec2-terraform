@@ -19,7 +19,7 @@ resource "aws_internet_gateway" "tf-igw" {
 
 # Subnet
 resource "aws_subnet" "tf-public-subnet" {
-  vpc_id = aws_vpc.tf-main-vpc.id
+  vpc_id     = aws_vpc.tf-main-vpc.id
   cidr_block = var.cidr_subnet
   # Optionals
   map_public_ip_on_launch = true
@@ -43,20 +43,20 @@ resource "aws_route_table_association" "rta_subnet_public" {
 
 # Security Group
 resource "aws_security_group" "allow_ssh" {
-  name = "allow_ssh"
+  name   = "allow_ssh"
   vpc_id = aws_vpc.tf-main-vpc.id
 
   ingress {
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
-      # only from own block.
-      # cidr_blocks = [aws_vpc.main.cidr_block]
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    # only from own block.
+    # cidr_blocks = [aws_vpc.main.cidr_block]
   }
 
- # -1 = "all"
- egress {
+  # -1 = "all"
+  egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
